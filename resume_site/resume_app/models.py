@@ -9,7 +9,7 @@ class Person(models.Model):
     photo = models.ImageField()
 
     def __str__(self):
-        return self.title
+        return self.name
 
 
 class Experience(models.Model):
@@ -20,7 +20,7 @@ class Experience(models.Model):
     is_current = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return self.company_name
 
 
 class Education(models.Model):
@@ -31,7 +31,7 @@ class Education(models.Model):
     is_current = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return self.name_institution
 
 
 class Skill(models.Model):
@@ -52,7 +52,7 @@ class Language(models.Model):
 class PortfolioProject(models.Model):
     title = models.CharField(max_length=255)
     discription = models.TextField()
-    scr_shot = models.ImageField()
+    scr_shot = models.ImageField(upload_to='images/')
     url = models.URLField(max_length=320)
 
     def __str__(self):
@@ -68,6 +68,7 @@ class Service(models.Model):
 
 
 class Contact(models.Model):
+    title = models.CharField(max_length=255)
     email = models.EmailField(max_length = 255)
     phone = models.CharField(max_length = 80)
     git = models.URLField(max_length=320)
@@ -88,10 +89,10 @@ class Message(models.Model):
         return self.subject
 
 
-class Resume(models.Model):
-    pass
-
-
 class Slider(models.Model):
-    pass
+    title = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='images/')
+    description = models.TextField()
 
+    def __str__(self):
+        return self.title
