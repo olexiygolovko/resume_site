@@ -1,0 +1,255 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+<body id="page-top">
+    <div class="container-fluid p-0">
+
+    <!--====================================================
+                        ABOUT
+    ======================================================-->
+      <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about" style="background-image: url('{% if slider %}{{ slider.first.image.url }}{% endif %}');">
+          <div class="my-auto" >
+              <h1 class="mb-0 ">{{ about.name }}
+                <span class="text-primary">{{ about.last_name }}</span>
+              </h1>
+              <div class="subheading mb-5">{{ about.profession }}
+              </div>
+              <p class="mb-5" style="max-width: 600px;" >{{ about.about }}</p>
+              <ul class="list-inline list-social-icons mb-0">
+                  <li class="list-inline-item">
+                      <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+                  </li>
+                  <li class="list-inline-item">
+                      <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+                  </li>
+                  <li class="list-inline-item">
+                      <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+                  </li>
+                  <li class="list-inline-item">
+                      <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+                  </li>
+              </ul>
+          </div>
+      </section>
+
+    <!--====================================================
+                        EXPERIENCE
+    ======================================================-->
+      <section class="resume-section p-3 p-lg-5 " id="experience">
+          <div class="row my-auto">
+              <div class="col-12">
+                <h2 class="  text-center">Experience</h2>
+                <div class="mb-5 heading-border"></div>
+              </div>
+              {% for val in experience %}
+              <div class="resume-item col-md-6 col-sm-12 " >
+                <div class="card mx-0 p-4 mb-5" style="border-color: #17a2b8; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
+                  <div class=" resume-content mr-auto">
+                      <h4 class="mb-3"><i class="fa fa-user-secret mr-3 text-info"></i> {{ val.position }}</h4>
+                      <p>{{ val.company_name }}</p>
+                      <p>{{ val.responsibility|linebreaks }} </p>
+                  </div>
+                  <div class="resume-date text-md-right">
+                    {% if val.is_current %}
+                      <span class="text-primary">{{ val.start_date_formatted }} - Present</span>
+                    {% else %}
+                      <span class="text-primary">{{ val.start_date_formatted }} - {{ val.end_date_formatted }}</span>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+          </div>
+      </section>
+
+    <!--====================================================
+                        PORTFOLIO
+    ======================================================-->
+    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="portfolio">
+      <div class="row my-auto">
+        <div class="col-12">
+          <h2 class="text-center">Portfolio</h2>
+          <div class="mb-5 heading-border"></div>
+        </div>
+      </div>    
+        <div class="col-md-12">
+          <div class="port-head-cont">
+            <form method="get">
+              <label class="text-center" for="category"></label>
+              <select class="btn btn-general btn-green filter-b" name="category" id="category">
+                  <option value="" {% if not selected_category %}selected{% endif %}>All</option>
+                  {% for category in categories %}
+                      <option value="{{ category.name }}" {% if selected_category == category.name %}selected{% endif %}>{{ category.name }}</option>
+                  {% endfor %}
+              </select>
+              <button class="btn btn-general btn-green filter-b" type="submit">Filter</button>
+            </form>
+           </div>
+          </div>
+          <div class="row my-auto">
+            {% for project in filter.qs %}
+                <div class="col-sm-4 portfolio-item">
+                    <a href="{{project.url}}"><h3>{{ project.title }}</h3></a>
+                    <a href="{{ project.scr_shot.url }}" data-lightbox="roadtrip" title="{{ project.title }}" description="{{project.description}}">
+                        <img class="img-fluid" src="{{ project.scr_shot.url }}"  alt="{{ project.title }}">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!--====================================================
+                        SKILLS
+    ======================================================-->
+      <section class=" d-flex flex-column" id="skills">
+         <div class="p-lg-5 p-3 skill-cover">
+          <h3 class="text-center text-white">Coding Skills</h3>
+          <div class="row text-center my-auto ">
+            <div class="col-md-3 col-sm-6">
+              <div class="skill-item">
+                  <i class="fa fa-code fa-5x"></i>
+                  <h2><span class="counter"> 65 </span><span>%</span></h2>
+                  <p>JavaScript</p>
+              </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+              <div class="skill-item">
+                  <i class="fa fa-globe fa-5x"></i>
+                  <h2><span class="counter"> 89 </span><span>%</span></h2>
+                  <p>Python</p>
+              </div>
+          </div>
+              <div class="col-md-3 col-sm-6">
+                  <div class="skill-item">
+                      <i class="fa fa-html5 fa-5x"></i>
+                      <h2><span class="counter"> 84 </span><span>%</span></h2>
+                      <p>HTML</p>
+                  </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                  <div class="skill-item">
+                      <i class="fa fa-css3 fa-5x"></i>
+                      <h2><span class="counter"> 95 </span><span>%</span></h2>
+                      <p>CSS</p>
+                  </div>
+              </div>
+          </div>
+         </div>
+      </section>
+
+    <!--====================================================
+                           Education
+    ======================================================-->
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="awards">
+          <div class="row my-auto">
+              <div class="col-12">
+                <h2 class="  text-center">Education</h2>
+                <div class="mb-5 heading-border"></div>
+              </div>
+              <div class="main-award" id="award-box">
+                  <div class="award">
+                      <div class="award-icon"></div>
+                      <div class="award-content">
+                          <span class="date">Apr 2017 - Mar 2018</span>
+                          <h5 class="title">Google Analytics Certified Developer</h5>
+                          <p class="description">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mattis felis vitae risus pulvinar tincidunt. Nam ac venenatis enim. Aenean hendrerit justo sed.
+                          </p>
+                      </div>
+                  </div>
+                  <div class="award">
+                      <div class="award-icon"></div>
+                      <div class="award-content">
+                          <span class="date">Apr 2018 - Mar 2019</span>
+                          <h5 class="title">Mobile Web Specialist - Google Certification</h5>
+                          <p class="description">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mattis felis vitae risus pulvinar tincidunt. Nam ac venenatis enim. Aenean hendrerit justo sed.
+                          </p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+    <!--====================================================
+                          CONTACT
+    ======================================================-->
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column">
+          <div class="row my-auto" id="contact">
+            <div class="col-md-8">
+              <div class="contact-cont">
+                <h3>CONTACT Me</h3>
+                <div class="heading-border-light"></div>
+                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here.</p>
+              </div>
+              <div class="row con-form">
+                <div class="col-md-12">
+                  <input type="text" name="full-name" placeholder="Full Name" class="form-control">
+                </div>
+                <div class="col-md-12">
+                  <input type="text" name="email" placeholder="Email Id" class="form-control">
+                </div>
+                <div class="col-md-12">
+                  <input type="text" name="subject" placeholder="Subject" class="form-control">
+                </div>
+                <div class="col-md-12"><textarea name="" id=""></textarea></div>
+                <div class="col-md-12 sub-but"><button class="btn btn-general btn-white" role="button">Send</button></div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12 mt-5">
+              <div class="contact-cont2">
+                <div class="contact-add contact-box-desc">
+                  <h3><i class="fa fa-map-marker cl-atlantis fa-2x"></i> Address</h3>
+                  <p>25, Dist town Street, Logn <br>
+                  California, US <br></p>
+                </div>
+                <div class="contact-phone contact-side-desc contact-box-desc">
+                  <h3><i class="fa fa-phone cl-atlantis fa-2x"></i> Phone</h3>
+                  <p>800 123 3456 <br>900 123 3457</p>
+                </div>
+                <div class="contact-mail contact-side-desc contact-box-desc">
+                  <h3><i class="fa fa-envelope-o cl-atlantis fa-2x"></i> Email</h3>
+                <address class="address-details-f">
+                  Fax: 800 123 3456 <br>
+                  Email: <a href="mailto:oleksiiholovko92@gmail.com" class="">oleksiiholovko92@gmail.com</a>
+                </address>
+                <ul class="list-inline social-icon-f top-data">
+                  <li><a href="#" target="_empty"><i class="fa top-social fa-facebook" style="color: #4267b2; border-color:#4267b2;"></i></a></li>
+                  <li><a href="#" target="_empty"><i class="fa top-social fa-twitter" style="color: #4AB3F4; border-color:#4AB3F4;"></i></a></li>
+                  <li><a href="#" target="_empty"><i class="fa top-social fa-google-plus" style="color: #e24343; border-color:#e24343;"></i></a></li>
+                </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+    </div>
+    <script>
+      lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true
+      })
+    </script>
+    </body>
+    {% endblock %}

@@ -6,6 +6,7 @@ class Person(models.Model):
     last_name = models.CharField(max_length=128)
     birth_date = models.DateField()
     about = models.TextField()
+    profession = models.CharField(max_length=128)
     photo = models.ImageField()
 
     def __str__(self):
@@ -15,12 +16,24 @@ class Person(models.Model):
 class Experience(models.Model):
     company_name = models.CharField(max_length=128)
     position = models.CharField(max_length=128)
+    responsibility = models.TextField()
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
     is_current = models.BooleanField(default=False)
 
     def __str__(self):
         return self.company_name
+    
+    def start_date_formatted(self):
+        return self.start_date.strftime("%B %Y")
+
+    def end_date_formatted(self):
+        if self.end_date:
+            return self.end_date.strftime("%B %Y")
+        elif self.is_current:
+            return "Present"
+        else:
+            return ""
 
 
 class Education(models.Model):
@@ -49,11 +62,19 @@ class Language(models.Model):
         return self.title
 
 
+class ProjectCategory(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+    
+
 class PortfolioProject(models.Model):
     title = models.CharField(max_length=255)
-    discription = models.TextField()
+    description = models.TextField()
     scr_shot = models.ImageField(upload_to='images/')
     url = models.URLField(max_length=320)
+    category = models.ForeignKey(ProjectCategory, on_delete=models.CASCADE)  # Связь с категорией
 
     def __str__(self):
         return self.title
@@ -61,7 +82,7 @@ class PortfolioProject(models.Model):
 
 class Service(models.Model):
     title = models.CharField(max_length=220)
-    icon = models.CharField(max_length=50, blank=True, null=True)
+    image = models.ImageField(upload_to='images/')
 
     def __str__(self):
         return self.title

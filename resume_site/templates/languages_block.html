@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+{% block content %}
+    <h2>Languages</h2>
+    <ul>
+        {% for lang in languages %}
+            <li>{{ lang.title }} - {{ lang.level }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

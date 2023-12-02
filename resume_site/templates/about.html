@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% block title %}About{% endblock %}
+
+{% block heading %}About me{% endblock %}
+
+{% block content %}
+
+    <p>{{ about.name }} {{ about.last_name}}</p>
+    <p><img hight=200 width=200 src="{{ about.photo.url }}" alt="{{ about.name }}" /></p>
+    <p>{{ about.birth_date }}</p>
+    <p>{{ about.about }}</p>
+    <p>{{ slider.image.url }}</p>
+
+    {% include "languages_block.html" with languages=languages %}
+
+{% endblock %}

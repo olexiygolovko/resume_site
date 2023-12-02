@@ -1,0 +1,59 @@
+<!-- {% load bootstrap4 %}
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    {% bootstrap_css %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>{% block title %}Моя страница{% endblock %}</title>
+</head>
+<body>
+    <h1>{% block heading %}{% endblock %}</h1>
+    <div id="content">
+        {% block content %}
+            <h2>Мои языки</h2>
+            <ul>
+                {% for lang in languages %}
+                    <li>{{ lang.title }} - {{ lang.level }}</li>
+                {% endfor %}
+            </ul>
+
+        {% endblock %}
+    {% bootstrap_javascript %}
+    </div>
+</body>
+</html> -->
+
+
+
+
+
+
+<!-- {% extends 'index.html' %}
+
+{% block title %}Main{% endblock %}
+
+{% block heading %}Main page{% endblock %}
+
+{% block content %}
+
+    {% for slid in slider %}
+            <p>{{ lang.title }}</p>
+            <p><img src="{{ slid.image.url }}" /></p>
+            <p>{{ lang.description }}</p>
+    {% endfor %}
+    <h2>About me</h2>
+    <p>{{ about_me.name }}-{{ about_me.last_name }}</p>
+    <p>{{ about_me.about }}</p>
+
+    {% include "languages_block.html" with languages=languages %}
+
+    <h2>Services</h2>
+    {% for service in services%}
+        <p><img height="200" width="200" src="{{ service.image.url }}"/></p>
+        <p>{{ service.title }}</p>
+    {% endfor %}
+
+
+{% endblock %} -->
