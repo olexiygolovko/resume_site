@@ -94,6 +94,7 @@ class Contact(models.Model):
     phone = models.CharField(max_length = 80)
     git = models.URLField(max_length=320)
     linkedin = models.URLField(max_length=320)
+    facebook = models.URLField(max_length=320)
 
     def __str__(self):
         return self.title

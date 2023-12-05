@@ -1,16 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from django_filters.views import FilterView
 from .filters import PortfolioProjectFilter
+from .forms import MessageForm
 
 
 def home(request):
     slider = Slider.objects.all()
     about = Person.objects.first()
     services = Service.objects.all()
+    education = Education.objects.all()
     portfolio = PortfolioProject.objects.all()
     languages = Language.objects.all()
     experience = Experience.objects.all()
+    contacts = Contact.objects.all()
     categories = ProjectCategory.objects.all()
     selected_category = request.GET.get('category')
 
@@ -21,16 +24,27 @@ def home(request):
 
     project_filter = PortfolioProjectFilter(request.GET, queryset=projects)
 
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')  # или куда вы хотите перенаправить после отправки формы
+    else:
+        form = MessageForm()
+        
     context = {
         'slider': slider,
         'about': about,
         'services': services,
+        'education': education,
         'portfolio': portfolio,
         'languages': languages,
         'experience': experience,
         'categories': categories,
         'selected_category': selected_category,
         'filter': project_filter,
+        'form': form,
+        'contacts': contacts,
     }
 
     return render(request, 'home.html', context)
@@ -53,17 +67,6 @@ def language(request):
         'languages': languages,
     }
     return render(request, 'languages_block.html', context)
-
-def education(request):
-    title = Education.objects.all()
-    speciality = Education.objects.all()
-    context = {
-        'title': title,
-        'speciality': speciality,
-    }
-
-    return render(request,'education.html', context)
-
 
 def main_page(request):
     person = Person.objects.first()
