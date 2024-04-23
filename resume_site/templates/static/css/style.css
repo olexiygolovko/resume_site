@@ -110,8 +110,8 @@ a:active {
           padding: 0.5rem;
       }
       #sideNav .navbar-brand .img-profile {
-          max-width: 10rem;
-          max-height: 10rem;
+          max-width: 15rem;
+          max-height: 15rem;
           border: 0.5rem solid rgba(255, 255, 255, 0.2);
       }
       #sideNav .navbar-collapse {
@@ -604,7 +604,7 @@ a:active {
 
 #award-box .date {
     display: block;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 600;
     color: #39b3ff;
     margin: 0 0 8px;
@@ -616,7 +616,7 @@ a:active {
 }
 
 #award-box .title {
-    font-size: 18px;
+    font-size: 25px;
     color: #444;
     margin-top: 0;
     transition: all 0.3s ease 0s;
@@ -627,7 +627,7 @@ a:active {
 }
 
 #award-box .description {
-    font-size: 16px;
+    font-size: 20px;
     color: #777;
     line-height: 28px;
     margin-top: 8px;
