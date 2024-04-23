@@ -75,3 +75,8 @@ def main_page(request):
         'person': person,
     }
     return render(request,'navigator.html', context)
+
+def handler404(request, exception, template_name="404.html"):
+    response = render(request, template_name)
+    response.status_code = 404
+    return response

@@ -3,6 +3,7 @@
 
 body {
     font-family: 'Open Sans', serif;
+    font-size: 1.65rem;
     padding-top: 54px;
     color: #868e96;
 }
@@ -790,4 +791,4 @@ a:active {
 
 .footer-year {
     text-align: center;
-} 
+}

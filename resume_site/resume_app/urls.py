@@ -4,6 +4,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
 
 from .views import *
+from .views import handler404
 
 
 urlpatterns = [
@@ -12,3 +13,5 @@ urlpatterns = [
     path('languages/', language, name='language'),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico')))
 ]
+
+handler404 = handler404
